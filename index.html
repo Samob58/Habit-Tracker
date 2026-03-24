@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- PWA Setup -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Habits">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div id="currentDate" class="current-date"></div>
+                <h1>Habit Tracker</h1>
+            </div>
+        </header>
+
+        <div id="activityList" class="activity-list">
+            <!-- Activities will appear here -->
+        </div>
+
+        <button class="add-new-btn" id="addActivityBtn">Add New</button>
+
+        <!-- Modal for adding new activity -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Add New Activity</h2>
+                <input type="text" id="activityInput" placeholder="Enter activity name...">
+                <div class="modal-buttons">
+                    <button id="saveActivityBtn">Add</button>
+                    <button id="cancelBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for editing activity -->
+        <div id="editModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Edit Activity</h2>
+                <input type="text" id="editActivityInput" placeholder="Enter new activity name...">
+                <div class="modal-buttons">
+                    <button id="saveEditBtn">Save</button>
+                    <button id="cancelEditBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for delete confirmation -->
+        <div id="deleteModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Delete Activity</h2>
+                <p id="deleteMessage"></p>
+                <div class="modal-buttons">
+                    <button id="confirmDeleteBtn" class="delete-confirm-btn">Yes, Delete</button>
+                    <button id="cancelDeleteBtn">No, Keep It</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Tab Container -->
+    <div class="container data-container hidden">
+        <header>
+            <div class="header-left">
+                <div id="dataDate" class="current-date"></div>
+                <h1>Analytics</h1>
+            </div>
+        </header>
+
+        <!-- Habit Selector -->
+        <div class="habit-selector">
+            <select id="habitDropdown">
+                <option value="">Select a habit...</option>
+            </select>
+        </div>
+
+        <!-- Stats will show when a habit is selected -->
+        <div id="statsContent" class="stats-content hidden">
+            <!-- Big Number Section -->
+            <div class="big-stat">
+                <div class="big-number" id="bigNumber">0</div>
+                <div class="big-label" id="bigLabel">Pomodoros (This Month)</div>
+            </div>
+
+            <!-- Time Range Toggle -->
+            <div class="time-toggle">
+                <button class="time-btn active" data-range="week">Week</button>
+                <button class="time-btn" data-range="month">Month</button>
+                <button class="time-btn" data-range="year">Year</button>
+                <button class="time-btn" data-range="all">All Time</button>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-container">
+                <canvas id="activityChart"></canvas>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statAverage">0</div>
+                    <div class="stat-label">Daily Average</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statBestDay">0</div>
+                    <div class="stat-label">Best Day</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statStreak">0</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statChange">0%</div>
+                    <div class="stat-label">vs Previous Period</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Data Message -->
+        <div id="noDataMessage" class="no-data-message">
+            <p>📊 No data yet!</p>
+            <p>Start tracking your habits to see analytics here.</p>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="home">
+            <span class="tab-icon">📊</span>
+            <span class="tab-label">Home</span>
+        </button>
+        <button class="tab-btn" data-tab="data">
+            <span class="tab-icon">📈</span>
+            <span class="tab-label">Data</span>
+        </button>
+    </nav>
+
+    <script src="app.js"></script>
+    <script>
+        // Register service worker for offline + PWA support
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(err => console.log('SW registration failed:', err));
+        }
+    </script>
+</body>
+</html>
