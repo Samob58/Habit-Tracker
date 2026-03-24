@@ -441,3 +441,35 @@ h1 {
 body {
     padding-bottom: 80px;
 }
+
+/* ====================================
+   DRAG AND DROP STYLES
+   Add these to the bottom of style.css
+   ==================================== */
+
+/* The floating clone that follows your finger */
+.drag-clone {
+    position: absolute;
+    z-index: 999;
+    pointer-events: none;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    opacity: 0.95;
+    transform: scale(1.02);
+    transition: box-shadow 0.2s;
+    /* Match the original card layout */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* The empty gap left behind while dragging */
+.drag-placeholder {
+    border-radius: 10px;
+    background: #e8f5e9;
+    border: 2px dashed #4CAF50;
+    margin-bottom: 0;
+    transition: height 0.15s;
+}
