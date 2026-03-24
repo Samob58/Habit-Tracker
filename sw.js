@@ -1,12 +1,13 @@
 const CACHE_NAME = 'habit-tracker-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  const ASSETS = [
+  '/Habit-Tracker/',
+  '/Habit-Tracker/index.html',
+  '/Habit-Tracker/style.css',
+  '/Habit-Tracker/app.js',
+  '/Habit-Tracker/manifest.json',
+  '/Habit-Tracker/icon-192.png',
+  '/Habit-Tracker/icon-512.png'
 ];
 
 // Install: cache all assets
